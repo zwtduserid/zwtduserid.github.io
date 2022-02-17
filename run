@@ -1,14 +1,5 @@
 #!/usr/bin/env php
 <?php
-/**
- * 入口文件
- *
- * @author mybsdc <mybsdc@gmail.com>
- * @date 2019/3/2
- * @time 11:05
- * @link https://github.com/luolongfei/freenom
- */
-
 error_reporting(E_ERROR);
 ini_set('display_errors', 1);
 set_time_limit(0);
@@ -36,7 +27,6 @@ require VENDOR_PATH . '/autoload.php';
 
 use Luolongfei\Lib\Log;
 use Luolongfei\Lib\Mail;
-use Luolongfei\Lib\TelegramBot;
 
 /**
  * @throws Exception
@@ -46,7 +36,6 @@ function customize_error_handler()
     if (!is_null($error = error_get_last())) {
         Log::error('程序意外终止', $error);
 //        Mail::send('主人，程序意外终止', '具体情况我也不清楚，请查看服务器日志定位问题。');
-//        TelegramBot::send('主人，程序意外终止，具体情况我也不清楚，请查看服务器日志定位问题。');
     }
 }
 
@@ -59,7 +48,6 @@ function exception_handler($e)
 {
     Log::error('未捕获的异常：' . $e->getMessage());
     Mail::send('主人，未捕获的异常', "具体的异常内容是：\n" . $e->getMessage());
-    TelegramBot::send('主人，发现未捕获的异常：' . $e->getMessage());
 }
 
 try {
